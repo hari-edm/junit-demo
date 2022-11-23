@@ -1,0 +1,21 @@
+  public String getUserName(int id) {
+    if (id <= 0) {
+      throw new IllegalArgumentException("Id should be greater than 0");
+    }
+    return dao.getUserName(id);
+  }
+  
+   @Test
+  public void testGetUserNameWithInvalidId() {
+    // given
+    int id = 0;
+    String expectedErrorMessage = "Id should be greater than 0";
+    // when
+    IllegalArgumentException thrown =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> service.getUserName(id),
+            "Expected getUserName(0) to throw, but it didn't");
+    // then
+    assertTrue(thrown.getMessage().equals(expectedErrorMessage));
+  }
